@@ -112,9 +112,11 @@ class PreCheckExistenceValidationHookTest
         validationHook = new PreCheckExistenceValidationHook();
 
         when( ctx.getBundle() ).thenReturn( bundle );
-        when( ctx.getStrategy( any( Event.class ) ) ).thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
-        when( ctx.getStrategy( any( Enrollment.class ) ) ).thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
-        when( ctx.getStrategy( any( TrackedEntity.class ) ) ).thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
+        when( ctx.getBundle().getStrategy( any( Event.class ) ) ).thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
+        when( ctx.getBundle().getStrategy( any( Enrollment.class ) ) )
+            .thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
+        when( ctx.getBundle().getStrategy( any( TrackedEntity.class ) ) )
+            .thenReturn( TrackerImportStrategy.CREATE_AND_UPDATE );
         when( ctx.getTrackedEntityInstance( SOFT_DELETED_TEI_UID ) ).thenReturn( getSoftDeletedTei() );
         when( ctx.getTrackedEntityInstance( TEI_UID ) ).thenReturn( getTei() );
         when( ctx.getProgramInstance( SOFT_DELETED_ENROLLMENT_UID ) ).thenReturn( getSoftDeletedEnrollment() );
@@ -133,7 +135,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateTrackedEntity( reporter, ctx, trackedEntity );
@@ -199,7 +201,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateTrackedEntity( reporter, ctx, trackedEntity );
@@ -217,7 +219,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.UPDATE );
+        when( ctx.getBundle().getStrategy( trackedEntity ) ).thenReturn( TrackerImportStrategy.UPDATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateTrackedEntity( reporter, ctx, trackedEntity );
@@ -235,7 +237,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEnrollment( reporter, ctx, enrollment );
@@ -301,7 +303,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEnrollment( reporter, ctx, enrollment );
@@ -319,7 +321,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.UPDATE );
+        when( ctx.getBundle().getStrategy( enrollment ) ).thenReturn( TrackerImportStrategy.UPDATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEnrollment( reporter, ctx, enrollment );
@@ -337,7 +339,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( event ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( event ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEvent( reporter, ctx, event );
@@ -403,7 +405,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( event ) ).thenReturn( TrackerImportStrategy.CREATE );
+        when( ctx.getBundle().getStrategy( event ) ).thenReturn( TrackerImportStrategy.CREATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEvent( reporter, ctx, event );
@@ -421,7 +423,7 @@ class PreCheckExistenceValidationHookTest
             .build();
 
         // when
-        when( ctx.getStrategy( event ) ).thenReturn( TrackerImportStrategy.UPDATE );
+        when( ctx.getBundle().getStrategy( event ) ).thenReturn( TrackerImportStrategy.UPDATE );
 
         TrackerValidationReport reporter = new TrackerValidationReport();
         validationHook.validateEvent( reporter, ctx, event );
